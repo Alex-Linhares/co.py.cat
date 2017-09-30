@@ -50,12 +50,13 @@ class WorkspaceObject(WorkspaceStructure):
         workspace.buildDescriptions(self)
 
     def __calculateIntraStringHappiness(self):
+        # TODO: Could be here
         if self.spansString():
             return 100.0
         if self.group:
             return self.group.totalStrength
         bondStrength = sum(bond.totalStrength for bond in self.bonds)
-        return bondStrength / 6.0
+        return bondStrength / 6.0  # why these numbers? Where do they come from?
 
     def __calculateRawImportance(self):
         """Calculate the raw importance of this object.
@@ -75,8 +76,9 @@ class WorkspaceObject(WorkspaceStructure):
 
     def updateValue(self):
         self.rawImportance = self.__calculateRawImportance()
+
         intraStringHappiness = self.__calculateIntraStringHappiness()
-        self.intraStringUnhappiness = 100.0 - intraStringHappiness
+        self.intraStringUnhappiness = 100.0 - intraStringHappiness  # TODO: Could be here
 
         interStringHappiness = 0.0
         if self.correspondence:
